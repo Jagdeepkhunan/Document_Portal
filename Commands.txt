@@ -1,0 +1,8 @@
+
+>>  nvm list
+>>  nvm use 25.0.0 
+
+
+>>  npx create-next-app@latest
+
+>> cd  .\ForntEnd\Next_js\document_portal
