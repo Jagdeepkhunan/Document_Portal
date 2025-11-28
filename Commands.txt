@@ -6,3 +6,52 @@
 >>  npx create-next-app@latest
 
 >> cd  .\ForntEnd\Next_js\document_portal
+>> npm run dev
+
+============================================================================
+
+>> python -m venv  Envs/Env_dcoument_portal
+
+>> Envs\Env_dcoument_portal\Scripts\activate
+>> deactivate 
+
+>> cd BackEnd\FastAPI\document_portal
+
+>> $Env:API_Access_key = "Wade Wilson"
+
+>> uvicorn main:app --reload
+
+>> pip freeze > requirements_2.txt
+
+============================================================================
+
+to disable warnings for .js file ----------------------------
+
+// eslint-disable-next-line
+var undefinedVar; 
+
+// eslint-disable-next-line no-unused-vars
+var unusedButNeededVar; 
+
+
+/* eslint-disable */
+// All code in this file will be ignored
+
+
+
+for python files ---------------------------------------------
+
+import os  # pylint: disable=unused-import 
+
+# pylint: disable-all
+
+for tsx files ----------------------------------------------
+
+// @ts-ignore
+const myVar: string = 123; 
+
+// @ts-nocheck
+
+------------------------------------------------------
+
+

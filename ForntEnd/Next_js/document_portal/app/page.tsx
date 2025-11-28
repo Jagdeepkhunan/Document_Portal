@@ -1,11 +1,11 @@
 import {createSession, getUser } from "../src/ServerSide/session" ;
+import LoginPage from "../src/ClientSide/login" ; 
 
 export default async function Home() {
-  //  await createSession("anyUSerID"); 
-  await getUser() ;
-  return ( <div> Home page </div>
-  )
-}
+    //
+    await getUser() ;
+    return (  <LoginPage /> )
+} 
 
 
 

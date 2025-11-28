@@ -20,7 +20,7 @@ export async function createSession(userId: string) {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
+    sameSite: 'lax', // this flag prevent csrf attack on latest browsers only
     path: '/',
   })
 }
