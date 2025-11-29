@@ -1,0 +1,14 @@
+C101 : login code format invalid
+C102 : user not found for login code
+C103 : login backend api error
+------------------------------------------------
+c104 : logout backend api error
+C105 : logout backend api faild to mark session as deactivte
+------------------------------------------------
+c106 : to get all sessions backend api error
+C107 : to get all sessions backend api faild provide data
+------------------------------------------------
+
+
+
+

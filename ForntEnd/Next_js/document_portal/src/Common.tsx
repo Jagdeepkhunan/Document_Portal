@@ -1,7 +1,4 @@
-const API_URL = "http://127.0.0.1:8000" ;
-const app_auth = process.env.API_Access_key! ; 
-
-console.log(" -- app_auth : ", app_auth ) ; 
+import { App_Auth } from "./urls" ; 
 
 export function delay(ms:number ) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -9,25 +6,30 @@ export function delay(ms:number ) {
 
 
 export async function MakeGetRequest(url : string){
-    const res = await fetch(API_URL + url, {
+    const res = await fetch(url, {
         method: "GET",
-        headers: { "Content-Type": "application/json" , "X-App-Auth" : app_auth },
+        headers: { "Content-Type": "application/json" , "X-App-Auth" : App_Auth },
     });
     
-    let data = await res.json();
+    let data : Record<string, any>  = { } ;
+    let resBody : string = await res.text() ;
+    try{  data = JSON.parse(resBody);  }
+    catch (error){ data = { "message" : resBody } ;  }
     data.status = res.status ; 
     data.ok = res.ok ;
     return data;
 }
 
-export async function MakePostRequest(url : string, body : Record<string, any> ){
-    const res = await fetch(API_URL + url , {
+export async function MakePostRequest(url : string, body : Record<string, any> ){ //  console.log(" request with data : ", JSON.stringify(body) ) ;
+    const res = await fetch(url , {
         method: "POST",
-        headers: { "Content-Type": "application/json" , "X-App-Auth" : app_auth },
+        headers: { "Content-Type": "application/json" , "X-App-Auth" : App_Auth },
         body: JSON.stringify(body),
     });
-    
-    let data = await res.json();
+    let data : Record<string, any>  = { } ;
+    let resBody : any = await res.text() ;
+    try{  data = JSON.parse(resBody);  }
+    catch (error){ data = { "message" : resBody } ;  }
     data.status = res.status ; 
     data.ok = res.ok ;
     return data;

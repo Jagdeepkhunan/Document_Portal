@@ -1,10 +1,12 @@
-import {createSession, getUser } from "../src/ServerSide/session" ;
+import {createSession, getSession } from "../src/ServerSide/session" ;
 import LoginPage from "../src/ClientSide/login" ; 
+import DashboardPage from "../src/ClientSide/dashboard/dashboardPage" ;
 
 export default async function Home() {
     //
-    await getUser() ;
-    return (  <LoginPage /> )
+    let sessionid = await getSession() ;
+    if(sessionid){ return (  <DashboardPage /> ) }
+    else{ return (  <LoginPage /> ) } 
 } 
 
 

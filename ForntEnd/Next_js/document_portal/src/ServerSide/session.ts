@@ -11,9 +11,8 @@ import { cookies } from 'next/headers'
 */
 
 
-export async function createSession(userId: string) {
+export async function createSession(session: string) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = 'mysession' ;  //  await encrypt({ userId, expiresAt })
   const cookieStore = await cookies()
  
   cookieStore.set('session', session, {
@@ -25,8 +24,14 @@ export async function createSession(userId: string) {
   })
 }
 
-export async function getUser( ) {
+export async function getSession( ) {
     const session = (await cookies()).get('session')?.value ; 
-    console.log("get user det -- session : ", session ) ;
-    
+    // console.log("get user det -- session : ", session ) ;
+    return session;
+}
+
+export async function deleteSession( ){ 
+    const deleteSession = (await cookies()).delete("session") // .clear()	-	Deletes all cookies
+    console.log(" deleteSession : " ) ; 
+    return true ;
 }

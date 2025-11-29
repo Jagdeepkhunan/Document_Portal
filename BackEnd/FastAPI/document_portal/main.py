@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from typing import List, Optional, Any, Dict
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request, Header
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request, Header, status , BackgroundTasks, Depends
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -19,6 +19,8 @@ print(" -- API_Access_key -- ", API_Access_key )
 if API_Access_key == "Empty" :
     raise Exception("Access Code Required")
 
+
+import RequestForm, Handler
 
 app = FastAPI(title="Document Portal API", version="1.0")
 
@@ -40,3 +42,23 @@ async def root(x_app_auth: str = Header(None)):
     if x_app_auth != API_Access_key :
         raise HTTPException(status_code=403, detail="No Access")
     return {"message": "Hello World"}
+
+@app.post("/login")
+async def root(ReqData:RequestForm.LoginRequest, background_tasks: BackgroundTasks, x_app_auth: str = Header(None) ):
+    #  print(" -- x_app_auth : ", x_app_auth )
+    if x_app_auth != API_Access_key :
+        raise HTTPException(status_code=403, detail="No Access")
+    return await Handler.Login(ReqData,background_tasks)
+    # return {"message": "Hello World"}
+
+@app.post("/logout")
+async def root(ReqData:RequestForm.BasicRequest, background_tasks: BackgroundTasks, x_app_auth: str = Header(None) ):
+    if x_app_auth != API_Access_key :
+        raise HTTPException(status_code=403, detail="No Access")
+    return await Handler.Logout(ReqData,background_tasks) 
+
+@app.post("/getallsession")
+async def root(ReqData:RequestForm.BasicRequest, background_tasks: BackgroundTasks, x_app_auth: str = Header(None) ):
+    if x_app_auth != API_Access_key :
+        raise HTTPException(status_code=403, detail="No Access")
+    return await Handler.getAllSession(ReqData,background_tasks) 
